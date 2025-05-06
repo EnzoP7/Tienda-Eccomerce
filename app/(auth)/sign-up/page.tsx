@@ -28,6 +28,7 @@ const SignUpPage = async (props: {
 
   if (session) {
     return redirect(callbackUrl || '/');
+    // return NextResponse.redirect(new URL('/', callbackUrl));
   }
 
   return (

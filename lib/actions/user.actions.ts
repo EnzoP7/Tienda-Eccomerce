@@ -8,12 +8,12 @@ import {
   updateUserSchema,
 } from '../validators';
 import { auth, signIn, signOut } from '@/auth';
-// import { isRedirectError } from 'next/dist/client/components/redirect-error';
+import { isRedirectError } from 'next/dist/client/components/redirect-error';
 import { hash } from '../encrypt';
 import { prisma } from '@/db/prisma';
 import { formatError } from '../utils';
 import { ShippingAddress } from '@/types';
-import { z, ZodError } from 'zod';
+import { z } from 'zod';
 import { PAGE_SIZE } from '../constants';
 import { revalidatePath } from 'next/cache';
 import { Prisma } from '@prisma/client';
@@ -34,11 +34,8 @@ export async function signInWithCredentials(
 
     return { success: true, message: 'Signed in successfully' };
   } catch (error) {
-    if (error instanceof ZodError) {
-      return {
-        success: false,
-        errors: error.flatten().fieldErrors,
-      };
+    if (isRedirectError(error)) {
+      throw error;
     }
     return { success: false, message: 'Invalid email or password' };
   }
@@ -86,12 +83,8 @@ export async function signUpUser(prevState: unknown, formData: FormData) {
 
     return { success: true, message: 'User registered successfully' };
   } catch (error) {
-    if (error instanceof ZodError) {
-      // Este es el formato que espera `useFormState`
-      return {
-        success: false,
-        errors: error.flatten().fieldErrors,
-      };
+    if (isRedirectError(error)) {
+      throw error;
     }
     return { success: false, message: formatError(error) };
   }

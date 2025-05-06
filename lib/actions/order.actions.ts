@@ -1,6 +1,6 @@
 'use server';
 
-import { isRedirectError } from 'next/dist/client/components/redirect';
+// import { isRedirectError } from 'next/dist/client/components/redirect';
 import { convertToPlainObject, formatError } from '../utils';
 import { auth } from '@/auth';
 import { getMyCart } from './cart.actions';
@@ -13,6 +13,7 @@ import { revalidatePath } from 'next/cache';
 import { PAGE_SIZE } from '../constants';
 import { Prisma } from '@prisma/client';
 import { sendPurchaseReceipt } from '@/email';
+import { ZodError } from 'zod';
 
 // Create order and create the order items
 export async function createOrder() {
@@ -98,8 +99,22 @@ export async function createOrder() {
       redirectTo: `/order/${insertedOrderId}`,
     };
   } catch (error) {
-    if (isRedirectError(error)) throw error;
-    return { success: false, message: formatError(error) };
+    // if (isRedirectError(error)) throw error;
+    // return { success: false, message: formatError(error) };
+    // if (isRedirectError(error)) throw error;
+
+    if (error instanceof ZodError) {
+      // Este es el formato que espera `useFormState`
+      return {
+        success: false,
+        errors: error.flatten().fieldErrors,
+      };
+    }
+
+    return {
+      success: false,
+      message: 'Ocurrió un error inesperado.',
+    };
   }
 }
 

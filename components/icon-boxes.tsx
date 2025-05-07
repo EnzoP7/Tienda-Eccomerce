@@ -3,31 +3,31 @@ import { Card, CardContent } from './ui/card';
 
 const IconBoxes = () => {
   return (
-    <div>
+    <div className='flex-1 wrapper text-center justify-center align-middle'>
       <Card>
         <CardContent className='grid md:grid-cols-4 gap-4 p-4'>
-          <div className='space-y-2'>
-            <ShoppingBag />
+          <div className='space-y-2 flex flex-col items-center text-center'>
+            <ShoppingBag className='w-8 h-8' />
             <div className='text-sm font-bold'>Free Shipping</div>
             <div className='text-sm text-muted-foreground'>
               Free shipping on orders above $100
             </div>
           </div>
-          <div className='space-y-2'>
+          <div className='space-y-2 flex flex-col items-center text-center'>
             <DollarSign />
             <div className='text-sm font-bold'>Money Back Guarantee</div>
             <div className='text-sm text-muted-foreground'>
               Within 30 days of purchase
             </div>
           </div>
-          <div className='space-y-2'>
+          <div className='space-y-2 flex flex-col items-center text-center'>
             <WalletCards />
             <div className='text-sm font-bold'>Flexible Payment</div>
             <div className='text-sm text-muted-foreground'>
               Pay with credit card, PayPal or COD
             </div>
           </div>
-          <div className='space-y-2'>
+          <div className='space-y-2 flex flex-col items-center text-center'>
             <Headset />
             <div className='text-sm font-bold'>24/7 Support</div>
             <div className='text-sm text-muted-foreground'>

@@ -10,7 +10,9 @@ const CartPage = async () => {
 
   return (
     <>
-      <CartTable cart={cart} />
+      <div className='flex-1 wrapper'>
+        <CartTable cart={cart} />
+      </div>
     </>
   );
 };

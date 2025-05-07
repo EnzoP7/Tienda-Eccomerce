@@ -25,7 +25,7 @@ const ProductDetailsPage = async (props: {
 
   return (
     <>
-      <section>
+      <section className='flex-1 wrapper'>
         <div className='grid grid-cols-1 md:grid-cols-5'>
           {/* Images Column */}
           <div className='col-span-2'>
@@ -90,7 +90,7 @@ const ProductDetailsPage = async (props: {
           </div>
         </div>
       </section>
-      <section className='mt-10'>
+      <section className='mt-10 flex-1 wrapper'>
         <h2 className='h2-bold mb-5'>Customer Reviews</h2>
         <ReviewList
           userId={userId || ''}

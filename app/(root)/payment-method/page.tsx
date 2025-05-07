@@ -18,8 +18,10 @@ const PaymentMethodPage = async () => {
 
   return (
     <>
-      <CheckoutSteps current={2} />
-      <PaymentMethodForm preferredPaymentMethod={user.paymentMethod} />
+      <div className='flex-1 wrapper'>
+        <CheckoutSteps current={2} />
+        <PaymentMethodForm preferredPaymentMethod={user.paymentMethod} />
+      </div>
     </>
   );
 };
